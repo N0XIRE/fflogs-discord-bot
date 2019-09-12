@@ -1,0 +1,16 @@
+{
+  "info": [
+    {
+      "cmd": "help",
+      "desc": "Displays this help message.",
+      "usage": "help",
+      "level": "0"
+    },
+    {
+      "cmd": "info",
+      "desc": "Displays bot information/stats.",
+      "usage": "info",
+      "level": "0"
+    }
+  ]
+}
