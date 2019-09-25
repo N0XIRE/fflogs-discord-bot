@@ -12,5 +12,38 @@
       "usage": "info",
       "level": "0"
     }
+  ],
+  "setup": [
+    {
+      "cmd": "setup",
+      "desc": "Shows setup commands and their current values.",
+      "usage": "setup",
+      "level": "0"
+    },
+    {
+      "cmd": "logs",
+      "desc": "Sets the channel for logs to be sent to.",
+      "usage": "logs <#channel>",
+      "level": "0"
+    },
+    {
+      "cmd": "guild",
+      "desc": "Sets the fflogs guild.",
+      "usage": "guild <name>",
+      "level": "0"
+    },
+    {
+      "cmd": "world",
+      "desc": "Sets the fflogs guilds world.",
+      "usage": "world <world>",
+      "level": "0"
+    },
+    {
+      "cmd": "region",
+      "desc": "Sets the fflogs guilds region. EG: NA, EU, etc.",
+      "usage": "region <abbreviation>",
+      "level": "0"
+    }
   ]
+
 }
