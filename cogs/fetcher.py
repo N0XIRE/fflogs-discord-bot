@@ -59,8 +59,8 @@ class fetcher(commands.Cog):
                         await self.log_sender(report)
                 guild_config['last_log'] = reports[0]['id']
 
-            # with open(f'servers/{server}.json', 'w') as f:
-                #json.dump(guild_config, f)
+            with open(f'servers/{server}.json', 'w') as f:
+                json.dump(guild_config, f)
 
     async def log_sender(self, log=None):
         embed = discord.Embed(title=f"{log['owner']} has uploaded a new log", description="_ _", color=0xFF00FF)
