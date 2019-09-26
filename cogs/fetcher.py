@@ -65,9 +65,9 @@ class fetcher(commands.Cog):
     async def log_sender(self, log=None):
         embed = discord.Embed(title=f"{log['owner']} has uploaded a new log", description="_ _", color=0xFF00FF)
         embed.add_field(name="Info", value=f"{log['title']}\nID: {log['id']} \u200b \u200b \u200b \u200b \u200b \u200b \u200b \u200b \u200b \u200b \u200b \u200b\u200b \u200b \u200b \u200b \n", inline=True)
-        embed.add_field(name="Links", value="[FFLogs](https://www.fflogs.com/reports/{log['id']})\n[XIVAnalysis](https://xivanalysis.com/find/{log['id']})", inline=True)
+        embed.add_field(name="Links", value=f"[FFLogs](https://www.fflogs.com/reports/{log['id']})\n[XIVAnalysis](https://xivanalysis.com/find/{log['id']})", inline=True)
         embed.set_footer(text=f"Uploaded: {datetime.datetime.now().strftime('%m/%d/%Y %H:%M CT')}")
-        channel = self.client.get_channel(603038874939293708)
+        channel = self.client.get_channel(int(self.logs_channel))
         message = await channel.send(embed=embed)
 
     @log_watcher.before_loop
