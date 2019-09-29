@@ -14,7 +14,7 @@ with open('config.json', 'r') as f:
 
 TOKEN = config['token']
 client = commands.Bot(command_prefix="-")
-startup_extensions = ["cogs.info", "cogs.fetcher"]
+startup_extensions = ["cogs.info", "cogs.fetcher", "cogs.server_setup"]
 client.remove_command('help')
 
 
