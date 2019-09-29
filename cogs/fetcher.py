@@ -25,7 +25,7 @@ class fetcher(commands.Cog):
     def cog_unload(self):
         self.log_watcher.cancel()
 
-    @tasks.loop(seconds=15.0)
+    @tasks.loop(seconds=10.0)
     async def log_watcher(self):
         print(self.id)
         self.id += 1
@@ -47,16 +47,20 @@ class fetcher(commands.Cog):
             url = f'https://www.fflogs.com:443/v1/reports/guild/{guildName}/{serverName}/{serverRegion}?api_key={self.api_key}'
             r = requests.get(url)
             reports = r.json()
+            valid_last_log = False
+            for report in reports:
+                if report['id'] == guild_config['last_log']:
+                    valid_last_log = True
 
-            if not guild_config['last_log']:
-                await self.log_sender(reports[0])
-                guild_config['last_log'] = reports[0]['id']
-            else:
+            if valid_last_log == True:
                 for report in reports:
                     if report['id'] == guild_config['last_log']:
                         break
                     else:
                         await self.log_sender(report)
+                guild_config['last_log'] = reports[0]['id']
+            else:
+                await self.log_sender(reports[0])
                 guild_config['last_log'] = reports[0]['id']
 
             with open(f'servers/{server}.json', 'w') as f:
@@ -68,7 +72,12 @@ class fetcher(commands.Cog):
         embed.add_field(name="Links", value=f"[FFLogs](https://www.fflogs.com/reports/{log['id']})\n[XIVAnalysis](https://xivanalysis.com/find/{log['id']})", inline=True)
         embed.set_footer(text=f"Uploaded: {datetime.datetime.now().strftime('%m/%d/%Y %H:%M CT')}")
         channel = self.client.get_channel(int(self.logs_channel))
-        message = await channel.send(embed=embed)
+        print(channel)
+        try:
+            message = await channel.send(embed=embed)
+        except:
+            print('Message Send Failed')
+        print('Report Sent')
 
     @log_watcher.before_loop
     async def before_log_watcher(self):
